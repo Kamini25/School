@@ -1,4 +1,4 @@
-## 1. Signup Flow — POST /api/auth/signup
+## 1. Signup Flow — POST /api/auth/signup.
 
 **Goal: Store a new user in the database (H2 in-memory DB).**
 
