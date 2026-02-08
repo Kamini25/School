@@ -183,7 +183,7 @@ Steps:
 * Push code to github
 * launch EC2 instanceon AWS
 * Install aws cli, docker, eksctl[kubernetes cluster], kubectl on ec2
-* Clone the project on ec2 machine
+* Clone the project on ec2 machine using git clone.
 * configure aws using ``aws configure`` and ``aws sts get-caller-identity``
 * create docker image using docker commands
 * Make sure your user is in the Docker group:
