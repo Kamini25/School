@@ -63,7 +63,6 @@ authenticationManager.authenticate(
 * Controller generates JWTs:
 
 * String accessToken = jwtUtil.generateAccessToken(username, roles);
-* String refreshToken = jwtUtil.generateRefreshToken(username);
 
 ## 3. JWT Token Generation (JwtUtil)
 
@@ -89,15 +88,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYW1pbmkiLCJyb2xlcyI6IlJPTEVfVVNFUiIsImlhdCI6MTc
 
 ## 4. Client Stores Tokens
 
-The client gets response:
-
-{
-  "access_token": "eyJhbGciOi...",
-  "refresh_token": "eyJhbGciOi...",
-  "token_type": "bearer"
-}
-
-
+The client gets response as token:
 It saves them (usually in browser localStorage or mobile secure store).
 
 ## 5. Accessing Protected Endpoint — GET /api/test/user
