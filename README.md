@@ -135,24 +135,6 @@ public String user() {
 
 * If no valid token → 403 Forbidden.
 
-## 7. Refresh Token Flow
-
-When the access token expires (after ~15 mins), client uses the refresh token:
-
-POST /api/auth/token
-grant_type=refresh_token&refresh_token=<token>
-
-
-Steps:
-
-* Controller validates refresh token.
-
-* Extracts username from token.
-
-* Issues new access_token and new refresh_token.
-
-* This avoids the user having to log in again.
-
 ## Flow Summary
 ### Step	Action	Component Involved	Key Behavior
 1	Signup	AuthController, UserRepository, PasswordEncoder	Save user in H2 with encoded password
@@ -164,8 +146,6 @@ Steps:
 4	Protected Request	JwtAuthFilter, CustomUserDetailsService	Validate JWT, set SecurityContext
 
 5	Controller Access	TestController	Allowed if authenticated
-
-6	Refresh Token	AuthController, JwtUtil	Issue new tokens without re-login
 
 
 
