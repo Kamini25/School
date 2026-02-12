@@ -1,3 +1,103 @@
+**School Management REST API** – a Spring Boot backend with secure authentication, role-based access, and token-based API protection. Built to practice real backend concerns such as security, layering, DTO mapping, error handling, and token lifecycle management.
+
+This project was intentionally kept small in scope, but designed with real production concerns in mind. The focus was not feature count, but correctness, clarity, and decision-making.
+
+**1. JWT-based Authentication**
+
+The application uses JWT (JSON Web Tokens) for authentication to keep the backend stateless and horizontally scalable.
+
+Why JWT
+
+Avoids server-side session storage
+Works naturally with REST APIs
+Suitable for cloud and containerized deployments
+
+Trade-offs considered
+
+JWT revocation is non-trivial once issued
+Token expiry is the primary safety mechanism
+Design choice
+Short-lived access tokens are used
+Token validation is enforced through Spring Security filters
+Expired or invalid tokens are handled explicitly
+
+**In a real production system, this could be extended with refresh tokens or token blacklisting if stronger revocation guarantees are required.
+**
+
+**2. Role-based Authorization**
+The system enforces role-based access control using Spring Security.
+
+Roles
+
+ROLE_USER
+ROLE_ADMIN
+
+Why role separation
+
+Clear authorization boundaries
+Easy to reason about permissions
+Matches real enterprise access models
+
+Authorization is enforced at the API layer, not just assumed at the UI level, ensuring backend-side security.
+
+**3. Stateless Backend Design**
+
+The backend is designed to be fully stateless.
+
+What this means
+
+No server-side session storage
+Each request contains all required authentication data
+Any instance can serve any request
+
+Why this matters
+
+Enables horizontal scaling
+Works cleanly in Kubernetes environments
+Simplifies failure recovery and restarts
+
+This design mirrors how production microservices are typically deployed.
+
+**4. Layered Architecture**
+
+The application follows a clear layered structure:
+
+Controller → Service → Repository
+
+
+Responsibilities
+
+Controller: Request validation, response mapping
+
+Service: Business logic and orchestration
+
+Repository: Data access abstraction
+
+Why this structure
+
+Improves readability and maintainability
+Makes testing easier
+Prevents tight coupling between layers
+This structure avoids “fat controllers” and keeps business logic testable and isolated.
+
+**5. Scope and Intent**
+This project is intentionally not a large end-to-end system.
+
+The goal was to:
+
+Reinforce Spring Boot and Spring Security fundamentals
+Practice secure API design
+Demonstrate clean layering and defensive coding
+Stay close to production-style decision making
+
+Given real traffic and requirements, the system could be extended with:
+
+* Refresh tokens
+* Database migrations (Flyway/Liquibase)
+* API versioning
+* Rate limiting
+* Observability and metrics
+
 ## 1. Signup Flow — POST /api/auth/signup.
 
 **Goal: Store a new user in the database (H2 in-memory DB).**
